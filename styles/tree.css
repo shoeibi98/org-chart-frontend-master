@@ -1,0 +1,9 @@
+.boc-light {
+  background: transparent !important;
+  font-family: IRANSansXFaNum, sans-serif !important;
+  max-height: 500px;
+}
+
+.boc-input {
+  direction: rtl;
+}
