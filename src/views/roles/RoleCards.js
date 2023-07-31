@@ -10,8 +10,20 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Icon from 'src/@core/components/icon'
 import Tooltip from "@mui/material/Tooltip";
+import {useRoleContext} from "./RoleWrapper";
+import {useTranslation} from "react-i18next";
+import i18next from 'i18next'
+import fa from 'src/i18n/role/fa'
+
+
+i18next.addResourceBundle('fa', 'role', fa)
+
 
 const RoleCards = () => {
+
+  const {setOpen, setDialogTitle} = useRoleContext()
+  const {t} = useTranslation('role')
+
   const {data: rolesData} = useQuery({
       queryKey: ["rolesData"],
       queryFn: getRoles
@@ -23,8 +35,11 @@ const RoleCards = () => {
       <Grid item xs={12} sm={4} lg={3} key={index}>
         <Card>
           <CardContent>
+            {/*{` ${item?.users.length} کاربر`}*/}
             <Box sx={{mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-              <Typography variant='body2'>{` ${item?.users.length} کاربر`}</Typography>
+              <Typography variant='body2'>
+                {t('userAssign', {value: item?.users.length})}
+              </Typography>
               <AvatarGroup max={4} sx={{'& .MuiAvatar-root': {width: 40, height: 40, fontSize: '0.875rem'}}}>
                 {item?.users.map((user, index) => (
                   <Tooltip key={index} title={user}>
@@ -50,9 +65,12 @@ const RoleCards = () => {
                   Edit Role
                 </Typography>*/}
               </Box>
-              <Tooltip title="ویرایش نقش">
-                <IconButton sx={{color: 'text.secondary'}}>
-                  <Icon icon='mdi:content-copy' fontSize={20}/>
+              <Tooltip title={t("editRole")}>
+                <IconButton sx={{color: 'text.secondary'}} onClick={() => {
+                  setDialogTitle("edit")
+                  setOpen(true)
+                }}>
+                  <Icon icon='mdi:note-edit-outline' fontSize={20}/>
                 </IconButton>
               </Tooltip>
             </Box>

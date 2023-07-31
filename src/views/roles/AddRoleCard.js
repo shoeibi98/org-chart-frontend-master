@@ -4,24 +4,22 @@ import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {useState} from "react";
-import EntryRoleDialog from "./EntryRoleDialog";
+import {useRoleContext} from "./RoleWrapper";
+import {useTranslation} from "react-i18next";
+import i18next from 'i18next'
+import fa from 'src/i18n/role/fa'
+
+i18next.addResourceBundle('fa', 'role', fa)
 
 const AddRoleCard = () => {
+  const {t} = useTranslation('role')
+  const {handleClickOpen, setDialogTitle} = useRoleContext()
 
-  const [open, setOpen] = useState(false)
-
-  const handleClickOpen = () => setOpen(true)
-  const handleClose = () => {
-    setOpen(false)
-    /*setSelectedCheckbox([])
-       setIsIndeterminateCheckbox(false)*/
-  }
 
   return <Grid item xs={12} sm={4} lg={3}>
     <Card
       sx={{cursor: 'pointer'}}
-      //onClick={() => handleClickOpen()}
+      onClick={() => handleClickOpen()}
     >
       <Grid container sx={{height: '100%'}}>
         <Grid item xs={5}>
@@ -37,15 +35,14 @@ const AddRoleCard = () => {
                 sx={{mb: 2.5, whiteSpace: 'nowrap'}}
                 onClick={() => {
                   handleClickOpen()
-                  /*  setDialogTitle('Add')*/
+                  setDialogTitle('add')
                 }}
               >
-                ایجاد نقش
+                {t("createRole")}
               </Button>
-              <Typography variant='body2'>درصورت وجود نداشتن نقش مورد نظر، آن را ایجاد کنید.</Typography>
+              <Typography variant='body2'>{t("descriptionCreateRole")}</Typography>
             </Box>
           </CardContent>
-          {open && <EntryRoleDialog dialogTitle={'افزودن'} open={open} handleClose={handleClose}/>}
         </Grid>
       </Grid>
     </Card>

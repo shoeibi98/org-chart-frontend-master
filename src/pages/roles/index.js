@@ -3,6 +3,8 @@ import PageHeader from "../../@core/components/page-header";
 import Box from "@mui/material/Box";
 import AddRoleCard from "../../views/roles/AddRoleCard";
 import Grid from "@mui/material/Grid";
+import RoleWrapper from "../../views/roles/RoleWrapper";
+import EntryRoleDialog from "../../views/roles/EntryRoleDialog";
 
 const Roles = () => {
   return <>
@@ -10,8 +12,13 @@ const Roles = () => {
       <PageHeader title="مدیریت نقش ها"/>
     </Box>
     <Grid container spacing={6} className='match-height'>
-      <RoleCards/>
-      <AddRoleCard/>
+      <RoleWrapper>
+        <>
+          <RoleCards/>
+          <AddRoleCard/>
+          <EntryRoleDialog/>
+        </>
+      </RoleWrapper>
     </Grid>
   </>
 }
