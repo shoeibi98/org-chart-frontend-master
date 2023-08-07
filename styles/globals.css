@@ -1,6 +1,10 @@
 @import "./fonts/font-iransans-x.css";
 @import "./tree.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   min-height: 100%;
@@ -17,10 +21,12 @@ code {
   color: #d400ff;
   border-radius: 0.1335rem;
 }
+
 code:not([class*='language-']):before,
 code:not([class*='language-']):after {
   content: '`';
 }
+
 code[class*='language-'] {
   padding: 0;
 }
